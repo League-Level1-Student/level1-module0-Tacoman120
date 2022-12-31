@@ -16,7 +16,7 @@ public class Houses {
 		rob.moveTo(30, 450);
 		rob.setSpeed(99);
 		rob.penDown();
-		for(int i = 100; i < 460; i+=40) {
+		for(int i = 100; i < 500; i+=40) {
 			String paint = JOptionPane.showInputDialog(null, "What color do you want the houses to be? (Chose from red, orange, yellow, green, blue, and purple )");
 			String bob = JOptionPane.showInputDialog(null, "What size house do you want? (Chose from small, medium or large)");
 		drawHouse(bob, paint);
@@ -51,9 +51,23 @@ public class Houses {
 			 
 	 
 		rob.move(bobb);
-		rob.turn(90);
-		rob.move(50);
-		rob.turn(90);
+		if(bobb==large) {
+			rob.turn(90);
+			rob.move(50);
+			rob.turn(90);
+		}else if (bobb==small){
+			rob.turn(45);
+			rob.move(30);
+			rob.turn(90);
+			rob.move(30);
+			rob.turn(45);
+		} else if (bobb==medium) {
+			rob.turn(45);
+			rob.move(30);
+			rob.turn(90);
+			rob.move(30);
+			rob.turn(45);
+		}
 		rob.move(bobb);
 		rob.turn(-90);
 		rob.setPenColor(0,200,0);
