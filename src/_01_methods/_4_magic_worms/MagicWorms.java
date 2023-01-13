@@ -40,7 +40,7 @@ public class MagicWorms extends PApplet {
 
     @Override
     public void setup() {
-
+background(0,0,0);
     }
 
     @Override
