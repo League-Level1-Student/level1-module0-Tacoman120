@@ -38,7 +38,7 @@ import processing.core.PImage;
 public class SpinningRecord extends PApplet {
     static final int WIDTH = 600;
     static final int HEIGHT = 600;
-    int spins;
+    int spins = 0;
     Song song = new Song("awesomeTrack.mp3");
     PImage pictureOfRecord;
     int rotations;
@@ -50,15 +50,23 @@ public class SpinningRecord extends PApplet {
     @Override
     public void setup() {
         
-    	pictureOfRecord=loadImage("image/record.png");
+    	pictureOfRecord=loadImage("images/record.png");
         pictureOfRecord.resize(600, 600);
-        image(pictureOfRecord, xPosition, yPosition);
+        
     }
 
     @Override
     public void draw() {
     	
-        
+    	rotateImage(pictureOfRecord, spins);
+    	image(pictureOfRecord, 0, 0);
+    	
+    	if(mousePressed) {
+    		spins++;
+    		song.play();
+    	}
+    	song.stop();
+    	
     }
 
     static public void main(String[] args) {
@@ -74,6 +82,7 @@ public class SpinningRecord extends PApplet {
     }
 
     class Song extends Sound {
+    	
         public Song(String songAddress) {
             super(songAddress);
         }
@@ -85,5 +94,6 @@ public class SpinningRecord extends PApplet {
                 super.play();
             }
         }
+        
     }
 }

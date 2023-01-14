@@ -44,13 +44,14 @@ import processing.core.PImage;
 public class RainGame extends PApplet {
     static final int WIDTH = 600;
     static final int HEIGHT = 600;
-
+    int fall=10;
     int score = 0;
     int bucketWidth = 50;
     int bucketHeight;
     PImage bucket;
-    int y;
+    //random = new Random();
     int x;
+    
 
     // Sets the size of your canvas
     @Override
@@ -60,13 +61,19 @@ public class RainGame extends PApplet {
 
     @Override
     public void setup() {
-    	bucket = loadImage("bucket.png");
+    	bucket = loadImage("images/bucket.png");
     	     bucket.resize(100, 100);  
     }
 
     @Override
     public void draw() {
-    
+    	int y = (int)random(601);
+    background(0,0,200);
+    ellipse(y, fall, 20, 20);
+    fall++;
+    if(fall>HEIGHT) {
+    	fall=10;
+    }
     }
 
     static public void main(String[] args) {
