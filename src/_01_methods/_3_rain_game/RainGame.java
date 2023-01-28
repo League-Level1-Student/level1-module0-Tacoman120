@@ -67,7 +67,10 @@ public class RainGame extends PApplet {
 
     @Override
     public void draw() {
-    	
+        fill(0, 0, 0);
+        text("Score: " + score, 20, 20);
+        textSize(16);
+
     background(0,0,200);
     image(bucket, mouseX, 500);
     ellipse(y, fall, 20, 20);
@@ -87,11 +90,11 @@ public class RainGame extends PApplet {
     /*********************** DO NOT MODIFY THE CODE BELOW ********************/
 
     void checkCatch(int x) {
-        if (x > mouseX && x < mouseX + bucketWidth && fall > 400) {
+        if (x > mouseX && x < mouseX + bucketWidth && fall > 500) {
             score++;
             fall=10;
        	 	y = (int)random(601);
-        } else if (score > 0) {
+        } else if (score > 0&&fall>595) {
             score--;
         }
         println("Your score is now: " + score);
