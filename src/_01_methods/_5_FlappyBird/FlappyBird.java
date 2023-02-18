@@ -10,8 +10,14 @@ public class FlappyBird extends PApplet {
     PImage pipeBottom;
     PImage pipeTop;
     PImage bird;
-    int x = 500;
-    int y = 500;
+    int x = 300;
+    int y = 300;
+    int birdYVelocity = -10;
+    int gravity = 1;
+    int pipeMove = 550;
+    int upperPipeHeight = 100;
+    int pipeGap = 505;
+    int lowerY = 0;
     @Override
     public void settings() {
         size(WIDTH, HEIGHT);
@@ -26,17 +32,37 @@ public class FlappyBird extends PApplet {
         bird = loadImage("bird.png");
         bird.resize(50,50);
         back.resize(800,600);
+        pipeTop.resize(50, upperPipeHeight);
+        pipeBottom.resize(50, lowerY);
     }
 
     @Override
     public void draw() {
-    	
+    	pipeTop.resize(50, upperPipeHeight);
+        pipeBottom.resize(50, lowerY);
+    	lowerY = upperPipeHeight + pipeGap;
     	 background(back);
-         image (pipeBottom,250,375);
-         image (pipeTop,250,-130);
+         image (pipeBottom,pipeMove,500);
+         image (pipeTop,pipeMove, 0);
          image (bird, x, y);
-         y--;
+        if(mousePressed) {
+        	mousepressed();
+        }
+        pipeMove--;
+        y+=gravity;
+        if(pipeMove==-50) {
+        	 teleportPipes();
+         }
+       
          
+    }
+    
+    void mousepressed() {
+    	y += birdYVelocity; 
+    }
+    void teleportPipes() {
+    	pipeMove=850;
+    	 upperPipeHeight = (int) random(100, 400);
     }
 
     static public void main(String[] args) {
