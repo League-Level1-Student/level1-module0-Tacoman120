@@ -13,12 +13,13 @@ public class FlappyBird extends PApplet {
     int x = 300;
     int y = 300;
     int birdYVelocity = -10;
-    int gravity = 1;
+    double gravity = 1;
     int pipeMove = 600;
     int upperPipeHeight = 250;
     int pipeGap = 100;
     int lowerY = 0;
     int score =0;
+    int speed = 1;
     @Override
     public void settings() {
         size(WIDTH, HEIGHT);
@@ -43,10 +44,9 @@ public class FlappyBird extends PApplet {
     		System.exit(0);
     	}
     	boolean bob = intersectsPipes();
-    	if(x==(pipeMove+25)) {
-    		score++;
-    	}
-    	text("Score: "+score, 40, 40);
+    	
+    	
+    	
     	lowerY = upperPipeHeight + pipeGap;
     	System.out.println(bob + "  pipeX: "+ pipeMove + "    x :" + x + "       score: "+ score);
     	pipeTop.resize(50, upperPipeHeight);
@@ -55,16 +55,22 @@ public class FlappyBird extends PApplet {
          image (pipeBottom,pipeMove,lowerY);
          image (pipeTop,pipeMove, 0);
          image (bird, x, y);
+         text("Score: "+score, 40, 40);
          if(bob==true) {
         	 System.exit(0);
          }
         if(mousePressed) {
         	mousepressed();
+        	gravity=1;
+        }else {
+        	gravity+=0.1;
         }
-        pipeMove--;
+        pipeMove-=speed;
         y+=gravity;
-        if(pipeMove==-50) {
+        if(pipeMove<= -50) {
+        	speed++;
         	 teleportPipes();
+         		score++;
          }
        
          
